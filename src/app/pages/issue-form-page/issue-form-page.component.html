@@ -1,0 +1,210 @@
+<app-loader *ngIf="loading; else not_load"></app-loader>
+<ng-template #not_load>
+  <div class="ui-form my-3">
+    <form [formGroup]="issueForm" (submit)="handleSubmitForm($event)">
+      <h1 class="text-center">Issue Form</h1>
+      <div class="form-group my-3">
+        <label class="form-label">Title</label>
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          formControlName="title"
+          [class]="{
+            'form-control': true,
+            'is-invalid':
+              title?.invalid && (title?.dirty || title?.touched || isSubmitForm)
+          }"
+        />
+        <div
+          *ngIf="
+            title?.invalid && (title?.dirty || title?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="title?.errors?.['required']">Title is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <label class="form-label">Description</label>
+        <input
+          type="text"
+          name="description"
+          placeholder="Description"
+          formControlName="description"
+          [class]="{
+            'form-control': true,
+            'is-invalid':
+              description?.invalid &&
+              (description?.dirty || description?.touched || isSubmitForm)
+          }"
+        />
+        <div
+          *ngIf="
+            description?.invalid &&
+            (description?.dirty || description?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="description?.errors?.['required']">
+            Description is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <label class="form-label">Attachment</label>
+        <input
+          type="text"
+          name="attachment"
+          placeholder="Attachment"
+          formControlName="attachment"
+          [class]="{
+            'form-control': true,
+            'is-invalid':
+              attachment?.invalid &&
+              (attachment?.dirty || attachment?.touched || isSubmitForm)
+          }"
+        />
+        <div
+          *ngIf="
+            attachment?.invalid &&
+            (attachment?.dirty || attachment?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="attachment?.errors?.['required']">
+            Attachment is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <label class="form-label">Type</label>
+        <select
+          name="type"
+          formControlName="typeId"
+          [class]="{
+            'form-select': true,
+            'is-invalid':
+              typeId?.invalid &&
+              (typeId?.dirty || typeId?.touched || isSubmitForm)
+          }"
+        >
+          <option value="" disabled>type</option>
+          <option *ngFor="let type of app.types" [value]="type.id">
+            {{ type.name }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            typeId?.invalid &&
+            (typeId?.dirty || typeId?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="typeId?.errors?.['required']">Type is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <label class="form-label">Status</label>
+        <select
+          name="status"
+          formControlName="statusId"
+          [class]="{
+            'form-select': true,
+            'is-invalid':
+              statusId?.invalid &&
+              (statusId?.dirty || statusId?.touched || isSubmitForm)
+          }"
+        >
+          <option value="" disabled>status</option>
+          <option *ngFor="let status of app.statuses" [value]="status.id">
+            {{ status.name }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            statusId?.invalid &&
+            (statusId?.dirty || statusId?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="statusId?.errors?.['required']">Status is required.</div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <label class="form-label">Assign To</label>
+        <select
+          name="assignTo"
+          formControlName="assignToId"
+          [class]="{
+            'form-select': true,
+            'is-invalid':
+              assignToId?.invalid &&
+              (assignToId?.dirty || assignToId?.touched || isSubmitForm)
+          }"
+        >
+          <option value="" disabled>Assign To</option>
+          <option *ngFor="let assignTo of app.users" [value]="assignTo.id">
+            {{ assignTo.firstName }} {{ assignTo.lastName }}
+          </option>
+        </select>
+
+        <div
+          *ngIf="
+            assignToId?.invalid &&
+            (assignToId?.dirty || assignToId?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="assignToId?.errors?.['required']">
+            Assign to is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group my-3">
+        <label class="form-label">Create by</label>
+        <select
+          name="createBy"
+          formControlName="createById"
+          [class]="{
+            'form-select': true,
+            'is-invalid':
+              createById?.invalid &&
+              (createById?.dirty || createById?.touched || isSubmitForm)
+          }"
+        >
+          <option value="" disabled>Create by</option>
+          <option *ngFor="let createBy of app.users" [value]="createBy.id">
+            {{ createBy.firstName }} {{ createBy.lastName }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            createById?.invalid &&
+            (createById?.dirty || createById?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="createById?.errors?.['required']">
+            Create by is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="offset-md-5">
+        <button
+          type="submit"
+          [class]="{ btn: true, 'btn-success': !isEdit, 'btn-info': isEdit }"
+        >
+          {{ btnName }}
+        </button>
+      </div>
+    </form>
+  </div>
+</ng-template>

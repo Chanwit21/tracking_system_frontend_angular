@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+  <div class="col-4">
+    <h1 class="text-center my-3">Log In</h1>
+    <form [formGroup]="signInForm" (submit)="handleSubmitForm($event)">
+      <div class="mb-3">
+        <label htmlFor="userName" class="form-label"> Username </label>
+        <input
+          type="text"
+          [class]="{
+            'form-control': true,
+            'is-invalid':
+              userName?.invalid &&
+              (userName?.dirty || userName?.touched || isSubmitForm)
+          }"
+          id="userName"
+          name="userName"
+          autoComplete="username"
+          formControlName="userName"
+        />
+        <div
+          *ngIf="
+            userName?.invalid &&
+            (userName?.dirty || userName?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="userName?.errors?.['required']">
+            Username is required.
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label htmlFor="password" class="form-label"> Password </label>
+        <input
+          type="password"
+          [class]="{
+            'form-control': true,
+            'is-invalid':
+              password?.invalid &&
+              (password?.dirty || password?.touched || isSubmitForm)
+          }"
+          id="password"
+          name="password"
+          formControlName="password"
+          autocomplete="current-password"
+        />
+        <div
+          *ngIf="
+            password?.invalid &&
+            (password?.dirty || password?.touched || isSubmitForm)
+          "
+          class="invalid-feedback"
+        >
+          <div *ngIf="password?.errors?.['required']">
+            password is required.
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>

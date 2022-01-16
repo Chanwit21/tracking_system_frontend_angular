@@ -1,0 +1,47 @@
+<app-loader *ngIf="loading; else not_load"></app-loader>
+<ng-template #not_load>
+  <div class="data2 table-responsive">
+    <table class="table table-striped table-sm table-hover">
+      <thead>
+        <tr>
+          <th style="width: 50px; text-align: center">#</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Attachment</th>
+          <th>Status</th>
+          <th>Type</th>
+          <th>Assign To</th>
+          <th>Create By</th>
+          <th style="width: 250px">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let issue of issues">
+          <td>{{ issue.id }}</td>
+          <td>{{ issue.title }}</td>
+          <td>{{ issue.description }}</td>
+          <td>{{ issue.attachment }}</td>
+          <td>{{ issue.status?.name || "-" }}</td>
+          <td>{{ issue.type?.name || "-" }}</td>
+          <td>{{ issue.assignTo?.firstName || "-" }}</td>
+          <td>{{ issue.createBy?.firstName || "-" }}</td>
+          <td>
+            <button
+              class="btn me-2 btn-sm btn-warning"
+              (click)="handleClickEdit(issue.id)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="handleClickDelete(issue.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-template>

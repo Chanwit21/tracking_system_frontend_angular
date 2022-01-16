@@ -1,0 +1,14 @@
+<tr>
+  <td style="text-align: center">{{ issue?.id }}</td>
+  <td>{{ issue?.title }}</td>
+  <td>{{ issue?.description }}</td>
+  <td>{{ issue?.attachment }}</td>
+  <td>{{ issue?.status?.name || "-" }}</td>
+  <td>{{ issue?.type?.name || "-" }}</td>
+  <td>{{ issue?.assignTo?.firstName || "-" }}</td>
+  <td>{{ issue?.createBy?.firstName || "-" }}</td>
+  <td>
+    <button class="btn me-2 btn-sm btn-warning">Edit</button>
+    <button class="btn btn-sm btn-danger">Delete</button>
+  </td>
+</tr>
